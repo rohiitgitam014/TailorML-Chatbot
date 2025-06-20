@@ -18,7 +18,7 @@ from sklearn.metrics import r2_score, classification_report
 from fpdf import FPDF
 import time
 
-st.set_page_config(page_title= "TailorML", page_icon="🧠", layout="centered")
+st.set_page_config(page_title="TailorML", page_icon="🧠", layout="centered")
 
 # ======== Styling ========
 st.markdown("""
@@ -81,7 +81,7 @@ if st.session_state.stage == "start":
         df = handle_missing_values(df)
         st.session_state.df = df
         st.session_state.stage = "uploaded"
-        st.experimental_rerun()
+        st.rerun()
 
 # ======== Stage: Preview ========
 elif st.session_state.stage == "uploaded":
@@ -96,7 +96,7 @@ elif st.session_state.stage == "uploaded":
 
     if st.button("✅ All Good, Next"):
         st.session_state.stage = "choose_target"
-        st.experimental_rerun()
+        st.rerun()
 
 # ======== Stage: Choose Target ========
 elif st.session_state.stage == "choose_target":
@@ -106,7 +106,7 @@ elif st.session_state.stage == "choose_target":
         st.session_state.target = target
         if st.button("🔍 Confirm Target"):
             st.session_state.stage = "predict"
-            st.experimental_rerun()
+            st.rerun()
 
 # ======== Stage: Predict ========
 elif st.session_state.stage == "predict":
@@ -174,7 +174,7 @@ elif st.session_state.stage == "predict":
         "X_train": X_train,
         "task_type": task_type
     })
-    st.experimental_rerun()
+    st.rerun()
 
 # ======== Stage: Results ========
 elif st.session_state.stage == "results":
@@ -276,9 +276,9 @@ elif st.session_state.stage == "results":
 
     if st.button("🔁 Try New Dataset"):
         st.session_state.stage = "start"
-        st.experimental_rerun()
+        st.rerun()
 
-# Chat Prompt (Optional)
+# ======== Chat Prompt (Optional) ========
 user_input = st.chat_input("💬 Ask TailorML about your results or next steps...")
 if user_input:
     st.chat_message("user").write(user_input)
